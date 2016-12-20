@@ -1,39 +1,61 @@
-sentance = 'try a salad for lunch, and dinner it is a nice treat '
+import string
+sentance = 'try a salad for lunch, and dinner it is a nice treat ' #what we're translating
 cut = 0					# integer to cut at the ' ' positions
-lastcut = 0				# integer to cut at the last ' ' position
-translator = ' '		# the first letter is cut by this
-translation = ' '		# end product of individual word
-fullTranslate = ''		# final product
+lastcut = 0				# integer to cut at the last ' ' position			
+firstLetterSlice = ''	# the first letter is cut by this
+finalProduct = ''		# final product
+word = ''
+vowels = [
+'a','A',
+'e','E',
+'i','I',
+'o','O',
+'u','U']
+punctuation = [
+'!',',','.','?','/',
+'"',"'",';',':']
+consonantCaps = [
+'B','C','D','F',
+'G','H','J','K',
+'L','M','N','P',
+'Q','R','S','T',
+'U','V','W','X',
+'Y','Z']
+
+def sentanceCutter(sentance):
+	'slices input sentance into individual words'
+	for i in sentance:
+		global cut
+		global lastcut
+		cut += 1
+		if i == ' ':
+			word = sentance[lastcut:cut]
+	return word
+
+def translator(word):
+	global vowels
+	global consonantCaps
+	if word[0] in vowels:
+		wordProduct = word + 'yay'
+	elif word[0] in consonantCaps:
+		firstletter = lower(word[0])
+		word = word[:0]
+		wordProduct = word + firstletter + 'ay'
+		wordProduct = capitalize(wordProduct)
+	else:
+		firstletter = word[0]
+		word = word[:0]
+		wordProduct = word + firstletter = 'ay'
+	return wordProduct
+
+def punctuationcheck(word):
+	position = 0
+	for i in word:
+		position = position + 1
+		if i in punctuation:
+			x = word[position-1:position]
+	return word  
 
 
-for i in sentance:
-	cut += 1
-	if i == ' ':
-		word = sentance[lastcut:(cut)]
-		lastcut = cut
-		if word[len(word)-1] == ','\
-							 or '.'\
-							 or '?'\
-							 or '!'\
-							 or '"'\
-							 or "'"\
-							 or '/':	# catches punctuation silly business
-			punctuation = word[-1]
-			word = word[:-1]
-			if word[0] == 'a'\
-						or 'e'\
-						or 'i'\
-						or 'o'\
-						or 'u':	#	-	- vowel proper pronounciation for punctuation
-				translation = word + 'yay'
-			else:
-				translation = word[1:] + translator + 'ay ' + punctuation
-		if word[0] == 'a' or 'e' or 'i' or 'o' or 'u':	#	-	-	-	-	-	-	-	- vowel proper pronounciation
-			translation = word + 'yay'
-		else:	#	-	-	-	-	-	-	-	-	-	-	-	-	-	-	-	-	-	- all other cases
-			translator = word[0:1]
-			translation = (word[1:] + translator + 'ay ')
-			fullTranslate = fullTranslate + translation + ' '
-print(len(fullTranslate))
-print(fullTranslate)
-		
+
+sentanceCutter(sentance)
