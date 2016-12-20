@@ -54,6 +54,7 @@ def punctuationcheck(word):
 		position = position + 1
 		if i in punctuation:
 			x = word[position-1:position]
+			word = word[position-1:]+word[:position]+x
 	return word  
 
 
